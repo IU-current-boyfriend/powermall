@@ -4,9 +4,39 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!--  指定springboot的版本号  -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.2</version>
+    </parent>
+
+
     <groupId>com.zc.cn</groupId>
     <artifactId>powermall</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <!--  统一管理版本  -->
+    <properties>
+        <!--  spring-cloud-dependencies版本 -->
+        <spring-cloud-dependencies.version>2022.0.0</spring-cloud-dependencies.version>
+        <!--  spring-cloud-alibaba-dependencies版本 -->
+        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
+        <!--  mysql8依赖     -->
+        <mysql.version>8.0.32</mysql.version>
+        <!--  德鲁伊数据库连接池  -->
+        <druid.version>1.2.18</druid.version>
+        <!--  lombok依赖  -->
+        <lombok.version>1.18.24</lombok.version>
+        <!--  mybatis-plus -->
+        <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
+        <!--  hutool工具包  -->
+        <hutool.version>5.8.2</hutool.version>
+        <!--  fastjson   -->
+        <fastjson.version>1.2.80</fastjson.version>
+        <!--  springfox -->
+        <springfox.version>3.0.0</springfox.version>
+    </properties>
 
     <!--  该工程下的子工程，注意不是所有的后代工程，只是子工程  -->
     <modules>
@@ -15,7 +45,95 @@
         <module>power-common</module>
     </modules>
 
+    <!-- 父工程中的依赖会被子工程自动继承   -->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+    </dependencies>
 
+
+    <!-- 父工程的依赖将被管理，子工程通过按需注册即可安装依赖   -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring-cloud依赖 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--  spring-cloud-alibaba依赖  -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--  lombok依赖  -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!--   mysql8依赖 -->
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <!--  德鲁伊连接池依赖  -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!--  mybatis-plus依赖     -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!--  mybatis常用注解依赖   -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!--   hutool工具包     -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!--   fastjson  -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!--   swagger -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
 
     <!-- maven项目如何表明该项目是父工程呢？
