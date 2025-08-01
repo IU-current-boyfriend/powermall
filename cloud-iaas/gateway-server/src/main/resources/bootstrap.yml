@@ -1,0 +1,43 @@
+#server:
+#  port: 9999 # 网关的端口号
+#  servlet:
+#    context-path: /
+
+spring:
+  application:
+    name: gateway-server # 网关的微服务名称
+  # 微服务配置
+  cloud:
+    nacos:
+      server-addr: http://10.211.55.7:8848 # nacos配置中心服务地址
+      username: nacos # nacos配置中心用户名称
+      password: nacos # nacos配置中心密码
+      # 该服务在注册中心的基本信息
+      discovery:
+        namespace: 6d76c9cf-22e6-4959-99b7-313b5ad56a35 # 该服务在注册中心的命名空间
+        group: ShenZhen # 该服务在注册中心的分组
+        service: ${spring.application.name} # 该服务在注册中心的服务名称
+      # 该服务在配置中心的基本信息
+      config:
+        namespace: ${spring.cloud.nacos.discovery.namespace} # 该服务在配置中心的命名空间
+        group: ${spring.cloud.nacos.discovery.group} # 该服务在配置中心的分组
+        prefix: ${spring.application.name} # 该服务在配置中心的配置文件名称 nacos配置中心命名规则: 微服务名称-环境.后缀名称
+        file-extension: yml # 该服务在配置中心的配置文件后缀
+    # 网关配置
+    gateway:
+      discovery:
+        # 动态路由
+        locator:
+          enabled: true # 开启动态路由 网关会从nacos注册中心获取注册微服务列表，会根据url地址动态路由到微服务，原理就是路由地址包含微服务名称
+  # 配置redis
+#  data:
+#    redis:
+#      port: 6380
+#      host: 10.211.55.7
+#      password: 123456
+
+  # 测试环境
+  profiles:
+    active: dev
+
+
