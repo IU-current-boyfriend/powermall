@@ -27,7 +27,7 @@
         <!--  德鲁伊数据库连接池  -->
         <druid.version>1.2.18</druid.version>
         <!--  lombok依赖  -->
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <!--  mybatis-plus -->
         <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
         <!--  hutool工具包  -->
@@ -36,6 +36,10 @@
         <fastjson.version>1.2.80</fastjson.version>
         <!--  springfox -->
         <springfox.version>3.0.0</springfox.version>
+        <!--  指定当前项目jdk的版本   -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <!--  该工程下的子工程，注意不是所有的后代工程，只是子工程  -->
@@ -80,7 +84,7 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-                <scope>provided</scope>
+<!--             <scope>provided</scope>-->
             </dependency>
 
             <!--   mysql8依赖 -->

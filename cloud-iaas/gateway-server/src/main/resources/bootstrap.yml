@@ -29,7 +29,7 @@ spring:
         # 动态路由
         locator:
           enabled: true # 开启动态路由 网关会从nacos注册中心获取注册微服务列表，会根据url地址动态路由到微服务，原理就是路由地址包含微服务名称
-  # 配置redis
+# 配置redis
 #  data:
 #    redis:
 #      port: 6380
@@ -39,5 +39,11 @@ spring:
   # 测试环境
   profiles:
     active: dev
+
+# 白名单路由地址,例如login这种路由地址,在通过网关服务的时候无需验证token
+gateway:
+  white:
+    allow-urls:
+      - /auth-server/doLogin
 
 
