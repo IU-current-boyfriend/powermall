@@ -29,4 +29,9 @@ public class AuthConstants {
 
 
     public static final String JSON_TYPE_UTF_8 = "application/json;charset=UTF-8";
+
+    /**
+     * 系统标识符
+     */
+    public static final String SYSTEM_MARK = "loginType";
 }
