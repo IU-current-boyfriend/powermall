@@ -1,0 +1,57 @@
+#server:
+#  port: 9998
+#  servlet:
+#    context-path: /
+
+spring:
+  application:
+    name: auth-server
+  cloud:
+    nacos:
+      server-addr: http://10.211.55.7:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: 6d76c9cf-22e6-4959-99b7-313b5ad56a35
+        group: ShenZhen
+        service: ${spring.application.name}
+      config:
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
+        prefix: ${spring.application.name}
+        file-extension: yml
+#        shared-configs:  # 共享配置文件
+#          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  profiles:
+    active: dev
+
+
+## 配置redis
+#  data:
+#    redis:
+#      port: 6380
+#      host: 10.211.55.7
+#      password: 123456
+#
+## 配置mysql
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://10.211.55.7:3306/powermall?useSSL=false&serverTimezone=GMT%2B8useUnicode=true&characterEncoding=utf-8
+#    username: root
+#    password: 123456
+#
+## 配置mvc
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
+#    format:
+#      date: yyyy-MM-dd HH:mm:ss  # 响应时格式化Date
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss # 请求时格式化Date
+#    time-zone: GMT+8
+
+# 配置mybatisPlus
+#mybatis-plus:
+#  mapper-locations: classpath*:mapper/*.*
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
