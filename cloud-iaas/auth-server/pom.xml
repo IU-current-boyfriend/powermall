@@ -55,6 +55,11 @@
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
+        <!--    security依赖    -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!--  公共基础模块   -->
         <dependency>
             <groupId>com.zc.cn</groupId>
