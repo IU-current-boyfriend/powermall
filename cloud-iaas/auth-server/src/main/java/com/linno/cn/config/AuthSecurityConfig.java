@@ -1,11 +1,17 @@
 package com.linno.cn.config;
 
+import com.linno.cn.contants.ApiConstants;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.annotation.Resource;
 
@@ -20,6 +26,12 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private UserDetailsService userDetailsService;
+
+    @Resource
+    private AuthenticationSuccessHandler systemLoginSuccessHandler;
+
+    @Resource
+    private AuthenticationFailureHandler systemLoginFailureHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -40,8 +52,8 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // 配置登陆相关信息
         http.formLogin()
-                .loginProcessingUrl("") // 登录请求Api的地址
-                .successHandler(null) // 登录请求成功处理器
+                .loginProcessingUrl(ApiConstants.POWER_SYSTEM_LOGIN_API) // 登录请求Api的地址
+                .successHandler(systemLoginSuccessHandler) // 登录请求成功处理器
                 .failureHandler(null); // 登录失败处理器
         // 配置登出相关信息
         http.logout()
@@ -50,5 +62,10 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 除了登录与登出无需认证身份，其它请求都需要认证身份
         http.authorizeRequests().anyRequest().authenticated();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

@@ -5,7 +5,6 @@ import com.linno.cn.config.AllowUrlsConfig;
 import com.linno.cn.contants.AuthConstants;
 import com.linno.cn.enums.HTTPEnum;
 import com.linno.cn.result.RsResult;
-import jakarta.annotation.Resource;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -17,6 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import javax.annotation.Resource;
+
 
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {

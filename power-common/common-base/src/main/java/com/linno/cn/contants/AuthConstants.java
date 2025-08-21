@@ -25,10 +25,10 @@ public class AuthConstants {
     /**
      * Content-Type标识符
      */
-    public static final String CONTENT_TYPE = "Content-Type";
+    public static final String CONTENT_JSON_TYPE = "application/json;charset=UTF-8";
 
 
-    public static final String JSON_TYPE_UTF_8 = "application/json;charset=UTF-8";
+    public static final String CHARACTER_UTF_8 = "UTF-8";
 
     /**
      * 系统标识符
@@ -45,4 +45,6 @@ public class AuthConstants {
      * 后台系统标识
      */
     public static final String SYSTEM_POWER_BOSS = "system:powerBoss";
+
+
 }

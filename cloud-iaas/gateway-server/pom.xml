@@ -23,6 +23,7 @@
      -->
 
     <dependencies>
+
         <!--    nacos注册中心依赖    -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
