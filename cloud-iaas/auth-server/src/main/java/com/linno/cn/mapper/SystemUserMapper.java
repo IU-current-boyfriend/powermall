@@ -1,7 +1,9 @@
 package com.linno.cn.mapper;
 
-import com.linno.cn.domain.SystemUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.linno.cn.domain.SystemUser;
+
+import java.util.Set;
 
 /**
 * @author zhengcong
@@ -10,7 +12,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.linno.cn.domain.SystemUser
 */
 public interface SystemUserMapper extends BaseMapper<SystemUser> {
-
+    /**
+     * 根据用户的id查询用户权限列表
+     */
+    Set<String> getUserPermsById(Long userId);
 }
 
 

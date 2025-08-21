@@ -5,19 +5,33 @@
 <mapper namespace="com.linno.cn.mapper.SystemUserMapper">
 
     <resultMap id="BaseResultMap" type="com.linno.cn.domain.SystemUser">
-            <id property="userId" column="user_id" />
-            <result property="username" column="username" />
-            <result property="password" column="password" />
-            <result property="email" column="email" />
-            <result property="mobile" column="mobile" />
-            <result property="status" column="status" />
-            <result property="createUserId" column="create_user_id" />
-            <result property="createTime" column="create_time" />
-            <result property="shopId" column="shop_id" />
+        <id property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="mobile" column="mobile"/>
+        <result property="status" column="status"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="shopId" column="shop_id"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        user_id,username,password,email,mobile,status,
+        user_id
+        ,username,password,email,mobile,status,
         create_user_id,create_time,shop_id
     </sql>
+
+    <!--  根据用户的id查询权限  -->
+    <select id="getUserPermsById"
+            parameterType="long"
+            resultType="java.lang.String">
+        SELECT sys_menu.perms
+        FROM sys_menu
+                 JOIN sys_role_menu
+                 JOIN sys_user_role
+                      ON (sys_menu.menu_id = sys_role_menu.menu_id AND sys_role_menu.role_id = sys_user_role.role_id)
+        WHERE sys_user_role.user_id = #{userId}
+          AND sys_menu.type = 2;
+    </select>
 </mapper>

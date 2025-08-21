@@ -34,4 +34,15 @@ public class AuthConstants {
      * 系统标识符
      */
     public static final String SYSTEM_MARK = "loginType";
+
+    /**
+     * 商城系统标识
+     */
+    public static final String SYSTEM_POWER_MALL = "system:powerMall";
+
+
+    /**
+     * 后台系统标识
+     */
+    public static final String SYSTEM_POWER_BOSS = "system:powerBoss";
 }
