@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.annotation.Resource;
 
@@ -32,6 +33,9 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private AuthenticationFailureHandler systemLoginFailureHandler;
+
+    @Resource
+    private LogoutSuccessHandler systemLogoutSuccessHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -54,11 +58,11 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginProcessingUrl(ApiConstants.POWER_SYSTEM_LOGIN_API) // 登录请求Api的地址
                 .successHandler(systemLoginSuccessHandler) // 登录请求成功处理器
-                .failureHandler(null); // 登录失败处理器
+                .failureHandler(systemLoginFailureHandler); // 登录失败处理器
         // 配置登出相关信息
         http.logout()
-                .logoutUrl("") // 登出请求Api地址
-                .logoutSuccessHandler(null); // 登出请求成功处理器
+                .logoutUrl(ApiConstants.POWER_SYSTEM_LOGOUT_API) // 登出请求Api地址
+                .logoutSuccessHandler(systemLogoutSuccessHandler); // 登出请求成功处理器
 
         // 除了登录与登出无需认证身份，其它请求都需要认证身份
         http.authorizeRequests().anyRequest().authenticated();
